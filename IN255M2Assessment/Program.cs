@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 
 namespace IN255M2Assessment
@@ -28,6 +29,10 @@ namespace IN255M2Assessment
             Section3();
             Section4();
             Section5();
+
+            Section1Part4();
+            Section2Part4();
+            Section3Part4();
         }
 
         /* 
@@ -164,6 +169,111 @@ namespace IN255M2Assessment
             Console.WriteLine("There are " + queue.Count + " items in teh queue. \n");
 
             Console.WriteLine("The next item is: " + queue.Peek() + "\n");
+        }
+
+
+
+
+        /* 
+       * 
+       * IN255M2 Assessment Part 4 Section 1
+       * 
+       */
+
+        public static void Section1Part4() {
+
+            ArrayList produceList = new ArrayList {
+                "bananas 0.59",
+                "grapes 2.99",
+                "apples 1.49",
+                "pears 1.39",
+                "lettuce 0.99",
+                "onions 0.79",
+                "potatoes 0.59",
+                "peaches 1.59"
+            };
+
+            using (StreamWriter writer = new StreamWriter("ProducePrice.txt"))
+            {
+                foreach (string item in produceList)
+                {
+                    writer.WriteLine(item);
+                }
+            }
+
+            int lineCount = FileLineCount("ProducePrice.txt");
+            Console.WriteLine("Section 1: There are " + lineCount + " poducts in the file.");
+        }
+
+        private static int FileLineCount(string filename)
+        {
+            int lineCount = 0;
+
+            using (StreamReader reader = new StreamReader(filename))
+            {
+                while(reader.ReadLine() != null)
+                {
+
+                    lineCount++;
+                }
+
+            }return lineCount;
+        }
+
+    /* 
+     * 
+     * IN255M2 Assessment Part 4 Section 2
+     * 
+     */
+
+
+        public static void Section2Part4()
+        {
+            string ProducePrice = "ProducePrice.txt";
+
+            using (StreamWriter writer = new StreamWriter(ProducePrice, append: true))
+            {
+
+                writer.WriteLine("peppers 0.99");
+                writer.WriteLine("celery 1.29");
+                writer.WriteLine("cabbage 0.79");
+                writer.WriteLine("tomatoes 1.19");
+
+
+            }
+
+            int lineCount = FileLineCount(ProducePrice);
+            Console.WriteLine("Section 2: There are " + lineCount + " products in the file");
+
+
+        }
+
+        public static void Section3Part4() {
+            string ProducePrice = "ProducePrice.txt";
+
+            ArrayList producePrice = new ArrayList();
+
+            using (StreamReader reader = new StreamReader(ProducePrice))
+            {
+
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+
+                    producePrice.Add(line);
+                }
+
+
+            }
+
+            Console.WriteLine("Section 3: Products in the produce price list: ");
+            for(int i = 0; i< producePrice.Count; i++)
+            {
+                Console.WriteLine((i + 1) + ". " + producePrice[i]);
+            }
+
+
+
         }
     }
 }
